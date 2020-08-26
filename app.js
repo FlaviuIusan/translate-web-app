@@ -9,8 +9,23 @@ function getTextToTranslate(){
     return document.getElementById('TextToTranslate').value;
 }
 
+function getLanguageSource(){
+    return document.getElementById('SelectLanguageSource').value;
+}
+
+function getLanguageTarget(){
+    return document.getElementById('SelectLanguageTarget').value;
+}
+
+function updateLang(sel){
+    sel.value = sel.options[sel.selectedIndex].text;
+}
+
 function translateText(){
+    var languageSource = getLanguageSource();
+    var languageTarget = getLanguageTarget();
     var text = getTextToTranslate();
+
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
 
@@ -21,5 +36,5 @@ function translateText(){
     };
     xhttp.open("POST", "translate.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("textToTranslate=" + text);
+    xhttp.send("textToTranslate=" + text + "&languageSource=" + languageSource + "&languageTarget=" + languageTarget);
 }

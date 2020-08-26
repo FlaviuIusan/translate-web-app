@@ -3,7 +3,7 @@
 <form>
     <div class="form-group row">
         <div class="col p-0">
-            <select class="form-control border-0" id="SelectLanguageToTranslateFrom">
+            <select class="form-control border-0" id="SelectLanguageSource" onchange="updateLang(this)">
                 <option>Detect Language</option>
                 <option>English</option>
                 <option>Romanian</option>
@@ -12,7 +12,7 @@
             </select>
         </div>
         <div class="col p-0">
-            <select class="form-control border-0" id="SelectLanguageToTranslateTo">
+            <select class="form-control border-0" id="SelectLanguageTarget" onchange="updateLang(this)">
                 <option>Romanian</option>
                 <option>English</option>
                 <option>French</option>
