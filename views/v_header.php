@@ -12,15 +12,15 @@
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-light">
-            <ul class="nav ">
+            <ul class="nav">
                 <li class="nav-item">
-                <a class="nav-link" href="#">Home</a>
+                <a class="nav-link text-dark" href="#">Home</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
+                <a class="nav-link text-dark" href="#">Features</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="#">Contact</a>
+                <a class="nav-link text-dark" href="#">Contact</a>
                 </li>
             </ul>
         </nav>

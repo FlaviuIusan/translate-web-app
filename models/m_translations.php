@@ -10,7 +10,7 @@ class Translations{
         
     }
 
-    public function getLanguageModel($languageName){
+    public function getLanguageModel($languageSource, $languageTarget){
 
         $ch = curl_init();
 
@@ -25,21 +25,24 @@ class Translations{
             echo 'Error:' . curl_error($ch);
         }
         curl_close($ch);
-
+        //get short name of languages
         $languagesArray = json_decode($resultJson, true);
-        echo "Available Languages:\n";
         foreach($languagesArray as $language => $details){
                 foreach($details as $detail){
-                    if($detail["language_name"]==$languageName)
-                        return $detail["language"];
+                    if($detail["language_name"]==$languageSource)
+                        $languageSource=$detail["language"];
+                    if($detail["language_name"]==$languageTarget)
+                        $languageTarget=$detail["language"];
                 }
                 
         }
+        //return model
+        return $languageSource."-".$languageTarget;
     }
 
     public function getTranslation($textToTranslate, $languageSource, $languageTarget){
 
-        $modelId = $this->getLanguageModel($languageSource)."-".$this->getLanguageModel($languageTarget);
+        $modelId = $this->getLanguageModel($languageSource,$languageTarget);
         $ch = curl_init();
         
         curl_setopt($ch, CURLOPT_URL, apiURL.'/v3/translate?version='.apiVersion);
