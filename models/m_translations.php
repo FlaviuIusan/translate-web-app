@@ -5,13 +5,14 @@ include('resources/defines.php');
 
 class Translations{
 
+    private $languagesArray;
+
     function __construct()
     {
-        
+        $this->languagesArray=$this->getApiLanguages();
     }
 
-    public function getLanguageModel($languageSource, $languageTarget){
-
+    public function getApiLanguages(){
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_URL, apiURL.'/v3/languages?version='.apiVersion);
@@ -25,9 +26,13 @@ class Translations{
             echo 'Error:' . curl_error($ch);
         }
         curl_close($ch);
-        //get short name of languages
         $languagesArray = json_decode($resultJson, true);
-        foreach($languagesArray as $language => $details){
+        return $languagesArray;
+    }
+
+    public function getLanguageModel($languageSource, $languageTarget){
+
+        foreach($this->languagesArray as $language => $details){
                 foreach($details as $detail){
                     if($detail["language_name"]==$languageSource)
                         $languageSource=$detail["language"];
@@ -38,6 +43,28 @@ class Translations{
         }
         //return model
         return $languageSource."-".$languageTarget;
+    }
+
+    public function getLanguagesSource(){
+        $languagesSource = array();
+        foreach($this->languagesArray as $language => $details){
+            foreach($details as $detail){
+                if($detail["supported_as_source"])
+                    $languagesSource[]=$detail["language_name"];
+            }
+        }
+        return $languagesSource;
+    }
+
+    public function getLanguagesTarget(){
+        $languagesSource = array();
+        foreach($this->languagesArray as $language => $details){
+            foreach($details as $detail){
+                if($detail["supported_as_target"])
+                    $languagesSource[]=$detail["language_name"];
+            }
+        }
+        return $languagesSource;
     }
 
     public function getTranslation($textToTranslate, $languageSource, $languageTarget){
@@ -67,7 +94,7 @@ class Translations{
         $translations = $resultArray["translations"];
         $translations = $translations[0];
         $translation = $translations["translation"];
-        echo "Translation: ".$translation."\n";
+        echo $translation;
     }
 }
 
