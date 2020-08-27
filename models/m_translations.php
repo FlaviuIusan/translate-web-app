@@ -30,19 +30,17 @@ class Translations{
         return $languagesArray;
     }
 
-    public function getLanguageModel($languageSource, $languageTarget){
+    public function getLanguageModel($languageName){
 
         foreach($this->languagesArray as $language => $details){
                 foreach($details as $detail){
-                    if($detail["language_name"]==$languageSource)
-                        $languageSource=$detail["language"];
-                    if($detail["language_name"]==$languageTarget)
-                        $languageTarget=$detail["language"];
+                    if($detail["language_name"]==$languageName)
+                        $languageModel=$detail["language"];
                 }
                 
         }
         //return model
-        return $languageSource."-".$languageTarget;
+        return $languageModel;
     }
 
     public function getLanguagesSource(){
@@ -57,19 +55,52 @@ class Translations{
     }
 
     public function getLanguagesTarget(){
-        $languagesSource = array();
+        $languagesTarget = array();
         foreach($this->languagesArray as $language => $details){
             foreach($details as $detail){
                 if($detail["supported_as_target"])
-                    $languagesSource[]=$detail["language_name"];
+                    $languagesTarget[]=$detail["language_name"];
             }
         }
-        return $languagesSource;
+        return $languagesTarget;
+    }
+
+    public function detectLanguage($textToTranslate){
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, apiURL.'/v3/identify?version='.apiVersion);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $textToTranslate);
+        curl_setopt($ch, CURLOPT_USERPWD, 'apikey' . ':' .apiKey);
+
+        $headers = array();
+        $headers[] = 'Content-Type: text/plain';
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+        $result_json = curl_exec($ch);
+        if (curl_errno($ch)) {
+            echo 'Error:' . curl_error($ch);
+        }
+        curl_close($ch);
+        
+        $resultArray = json_decode($result_json, true);
+        $detectedLanguages = $resultArray["languages"];
+        $bestMatchLanguage = $detectedLanguages[0];
+        return $bestMatchLanguage["language"];
     }
 
     public function getTranslation($textToTranslate, $languageSource, $languageTarget){
 
-        $modelId = $this->getLanguageModel($languageSource,$languageTarget);
+        if($languageSource=="Detect Language"){
+            $languageSource=$this->detectLanguage($textToTranslate);
+            $modelId = $languageSource . "-" . $this->getLanguageModel($languageTarget);
+            
+        }
+        else{
+            $modelId = $this->getLanguageModel($languageSource) . "-" . $this->getLanguageModel($languageTarget);
+        }
         $ch = curl_init();
         
         curl_setopt($ch, CURLOPT_URL, apiURL.'/v3/translate?version='.apiVersion);
