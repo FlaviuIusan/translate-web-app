@@ -22,6 +22,7 @@ function updateLang(sel){
 }
 
 function translateText(){
+    
     var languageSource = getLanguageSource();
     var languageTarget = getLanguageTarget();
     var text = getTextToTranslate();
