@@ -48,7 +48,7 @@ class Translations{
         foreach($this->languagesArray as $language => $details){
             foreach($details as $detail){
                 if($detail["supported_as_source"])
-                    $languagesSource[]=$detail["language_name"];
+                    $languagesSource[$detail["language_name"]]=$detail["language"];
             }
         }
         return $languagesSource;
@@ -59,7 +59,7 @@ class Translations{
         foreach($this->languagesArray as $language => $details){
             foreach($details as $detail){
                 if($detail["supported_as_target"])
-                    $languagesTarget[]=$detail["language_name"];
+                    $languagesTarget[$detail["language_name"]]=$detail["language"];
             }
         }
         return $languagesTarget;
@@ -95,11 +95,11 @@ class Translations{
 
         if($languageSource=="Detect Language"){
             $languageSource=$this->detectLanguage($textToTranslate);
-            $modelId = $languageSource . "-" . $this->getLanguageModel($languageTarget);
+            $modelId = $languageSource . "-" . $languageTarget;
             
         }
         else{
-            $modelId = $this->getLanguageModel($languageSource) . "-" . $this->getLanguageModel($languageTarget);
+            $modelId = $languageSource . "-" . $languageTarget;
         }
         $ch = curl_init();
         

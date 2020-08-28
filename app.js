@@ -18,7 +18,7 @@ function getLanguageTarget(){
 }
 
 function updateLang(sel){
-    sel.value = sel.options[sel.selectedIndex].text;
+    sel.value = sel.options[sel.selectedIndex].value;
 }
 
 function translateText(){

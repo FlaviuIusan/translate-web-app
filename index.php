@@ -1,19 +1,21 @@
 <?php
 include('models/m_translations.php');
 
+$Translations = new Translations();
+
 function generateLanguagesSource(){
-    $Translations = new Translations();
+    global $Translations;
     $languagesSource = $Translations->getLanguagesSource();
-    foreach($languagesSource as $language){
-        echo "<option>".$language."</option>";
+    foreach($languagesSource as $languageName => $languageModel){
+        echo "<option value='".$languageModel."'>".$languageName."</option>";
     }
 }
 
 function generateLanguagesTarget(){
-    $Translations = new Translations();
+    global $Translations;
     $languagesTarget = $Translations->getLanguagesTarget();
-    foreach($languagesTarget as $language){
-        echo "<option>".$language."</option>";
+    foreach($languagesTarget as $languageName => $languageModel){
+        echo "<option value='".$languageModel."'>".$languageName."</option>";
     }
 }
 
