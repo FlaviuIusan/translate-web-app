@@ -122,10 +122,15 @@ class Translations{
 
         //get translation from json result
         $resultArray=json_decode($result_json, true);
-        $translations = $resultArray["translations"];
-        $translations = $translations[0];
-        $translation = $translations["translation"];
-        echo $translation;
+        if(isset($resultArray["error"])){
+            echo "";
+        }
+        else{
+            $translations = $resultArray["translations"];
+            $translations = $translations[0];
+            $translation = $translations["translation"];
+            echo $translation;
+        }
     }
 }
 

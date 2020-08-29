@@ -1,3 +1,5 @@
+<?php include('views/v_header.php');?>
+
 <?php
 include('models/m_translations.php');
 
@@ -20,5 +22,6 @@ function generateLanguagesTarget(){
 }
 
 include('views/v_home.php');
-
 ?>
+
+<?php include('views/v_footer.php'); ?>

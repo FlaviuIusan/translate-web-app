@@ -14,13 +14,16 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-light">
             <ul class="nav">
                 <li class="nav-item">
-                <a class="nav-link text-dark" href="#">Home</a>
+                <a class="nav-link text-dark" href="index.php"><img style="border-radius: 25px;" src="resources/images/background.jpg" width="40px" height="20px"></a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link text-dark" href="#">Features</a>
+                <a class="nav-link text-dark" href="index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link text-dark" href="#">Contact</a>
+                <a class="nav-link text-dark" href="features.php">Features</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link text-dark" href="contact.php">Contact</a>
                 </li>
             </ul>
         </nav>
