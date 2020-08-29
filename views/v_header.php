@@ -11,10 +11,10 @@
         <title>Translate Web App</title>
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-light">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-light fixed-top" style="height: 5vh;">
             <ul class="nav">
                 <li class="nav-item">
-                <a class="nav-link text-dark" href="index.php"><img style="border-radius: 25px;" src="resources/images/background.jpg" width="40px" height="20px"></a>
+                <a class="nav-link text-dark" href="index.php"><img style="border-radius: 5px 5px;"  src="resources/images/LogoBun5.png" width="50px" height="30px"></a>
                 </li>
                 <li class="nav-item">
                 <a class="nav-link text-dark" href="index.php">Home</a>
@@ -27,6 +27,4 @@
                 </li>
             </ul>
         </nav>
-        <hr class="p-0 m-0">
-        <br><br><br>
         
