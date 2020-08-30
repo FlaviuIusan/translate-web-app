@@ -1,4 +1,4 @@
-<div class="p-0 b-0" style="background-image:url(resources/images/BackgroundGood5.png); height: 90vh; margin-top: 5vh; background-size: cover; background-position: center center;">
+<div class="p-0 b-0" style="background-size: 400px ;background-image:url(resources/images/LogoOpac.png); height: 90vh; margin-top: 5vh; background-size: cover; background-position: center 165px;">
 <hr class="p-0 m-0">
 <br><br><br>
 <form style="max-width: 80%; margin-left: 10%;">
